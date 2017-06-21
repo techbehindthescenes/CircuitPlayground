@@ -12,3 +12,5 @@ To switch colors, press right button while holding any of the capacitive touch s
 3) Right switch side, left button - accelerometer animation
 
 4) Right switch side, right button - lights react to sounds
+
+Demo video: https://www.youtube.com/watch?v=VGhraGdZsV4&t=9s
