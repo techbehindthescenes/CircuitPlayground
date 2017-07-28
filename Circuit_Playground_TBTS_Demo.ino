@@ -388,35 +388,70 @@ void loop() {
   //===================================
   // Mode 2: Show led light at "bottom" of a gyrating circuit playground; uses accelerometer
   // Right slide, left button click
+
   //===================================
   while (mode == 2 && !stateHasChanged()) {    
       X = CircuitPlayground.motionX();
       Y = CircuitPlayground.motionY();
       Z = CircuitPlayground.motionZ();
 
-      //Serial.print("X: ");
-      //Serial.print(X);
-      //Serial.print("  Y: ");
-      //Serial.print(Y);
-      //Serial.print("  Z: ");
-      //Serial.println(Z);
-  
+//      Serial.print("X: ");
+//      Serial.print(X);
+//      Serial.print("  Y: ");
+//      Serial.print(Y);
+//      Serial.print("  Z: ");
+//      Serial.println(Z);
+
+//  NEWER Mode 2 code - with all neopixels
+ 
+     int pin = -1;
+     int scale = 3.5; 
+    // scale = scale * (abs(X) / 9.5); 
+     int YScale = int(abs(Y)/scale);
+     
       if (X > 0 && Y > 0) {
-        CircuitPlayground.clearPixels();
-        CircuitPlayground.setPixelColor(6, CircuitPlayground.colorWheel(chosenColor));
+         pin = 5 ;
+         pin += YScale;
       } 
-      if (X > 0 && Y < 0) {
-        CircuitPlayground.clearPixels();
-        CircuitPlayground.setPixelColor(3, CircuitPlayground.colorWheel(chosenColor));
-      }
+
       if (X < 0 && Y > 0) {
-        CircuitPlayground.clearPixels();
-        CircuitPlayground.setPixelColor(8, CircuitPlayground.colorWheel(chosenColor));
+         pin = 9;
+         pin -= YScale;
+      } 
+
+
+      if (X > 0 && Y < 0) {
+         pin = 4;
+         pin -= YScale;
       }
-      if (X < 0 && Y < 0) {
-        CircuitPlayground.clearPixels();
-        CircuitPlayground.setPixelColor(1, CircuitPlayground.colorWheel(chosenColor));
+
+     if (X < 0 && Y < 0) {
+         pin = 0;
+         pin += YScale;
       }
+
+        CircuitPlayground.clearPixels();
+        CircuitPlayground.setPixelColor(pin, CircuitPlayground.colorWheel(chosenColor));
+
+//  OLDER Mode 2 code with only 4 pixels
+
+//      if (X > 0 && Y > 0) {
+//        CircuitPlayground.clearPixels();
+//        CircuitPlayground.setPixelColor(6, CircuitPlayground.colorWheel(chosenColor));
+//      } 
+//
+//      if (X > 0 && Y < 0) {
+//        CircuitPlayground.clearPixels();
+//        CircuitPlayground.setPixelColor(3, CircuitPlayground.colorWheel(chosenColor));
+//      }
+//      if (X < 0 && Y > 0) {
+//        CircuitPlayground.clearPixels();
+//        CircuitPlayground.setPixelColor(8, CircuitPlayground.colorWheel(chosenColor));
+//      }
+//      if (X < 0 && Y < 0) {
+//        CircuitPlayground.clearPixels();
+//        CircuitPlayground.setPixelColor(1, CircuitPlayground.colorWheel(chosenColor));
+//      }
     }
 
     //===================================
