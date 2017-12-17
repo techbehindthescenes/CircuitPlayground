@@ -118,6 +118,8 @@ int soundSensorValue;
 int lightValue; 
 int mode; //0, 1, 2, 3
 boolean slideSwitch; //true = left side; false = right side
+// SA 
+int gCounter = 0;
 
 //====================================================================
 // State and Control Helpers
@@ -429,9 +431,19 @@ void loop() {
          pin = 0;
          pin += YScale;
       }
-
+    
+// SA 
+    gCounter++; 
+    if (gCounter > 10 ) { 
         CircuitPlayground.clearPixels();
         CircuitPlayground.setPixelColor(pin, CircuitPlayground.colorWheel(chosenColor));
+        delay(100);
+        gCounter = 0;
+    }
+    
+// SA 
+// TODO: 
+// make the ball roll from Pin to Pin 
 
 //  OLDER Mode 2 code with only 4 pixels
 
